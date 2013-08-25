@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:version='2'>
+
+ <head>
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+     <title><data:blog.pageTitle/></title>
+ <b:include data='blog' name='all-head-content'/>
+&lt;style type=&quot;text/css&quot;&gt;
+&lt;!-- /*
+ <b:skin><![CDATA[*/
+]]></b:skin>
+ <b:template-skin><![CDATA[
+]]></b:template-skin>
+</head>
+
+<body>
+  <b:section class='header' id='header'>
+    <b:widget id='Header1' locked='false' title='5202 (Header)' type='Header'>
+      <b:includable id='main'>
+        <h1><b:include name='title'/></h1>
+        </b:includable>
+      <b:includable id='description'/>
+      <b:includable id='title'>
+       <b:if cond='data:blog.url == data:blog.homepageUrl'>
+        <data:title/>
+       <b:else/>
+        <a expr:href='data:blog.homepageUrl'><data:title/></a>
+        </b:if>
+</b:includable>
+    </b:widget>
+  </b:section>
+<b:section class='main' id='main'>
+  <b:widget id='Blog1' locked='false' title='Blogposts' type='Blog'>
+    <b:includable id='main'>
+       <b:loop values='data:posts' var='i'>    
+            <b:include data='i' name='post'/>
+       </b:loop>
+      <br />
+      <b:include name='nextprev'/>
+    </b:includable>
+    <b:includable id='backlinkDeleteIcon'/>
+    <b:includable id='backlinks'/>
+    <b:includable id='comment-form'/>
+    <b:includable id='commentDeleteIcon'/>
+    <b:includable id='comment_count_picker'/>
+    <b:includable id='comment_picker'/>
+    <b:includable id='comments'/>
+    <b:includable id='feedLinks'/>
+    <b:includable id='feedLinksBody'/>
+    <b:includable id='iframe_comments'/>
+    <b:includable id='mobile-index-post'/>
+    <b:includable id='mobile-main'/>
+    <b:includable id='mobile-nextprev'/>
+    <b:includable id='mobile-post'/>
+    <b:includable id='nextprev'>
+    <b:if cond='data:newerPageUrl'>
+     <a expr:href='data:newerPageUrl'>
+       <data:newerPageTitle/>
+      </a>
+    </b:if>
+    <b:if cond='data:olderPageUrl'>
+      <a expr:href='data:olderPageUrl'>
+        <data:olderPageTitle/>
+      </a>
+    </b:if>
+    </b:includable>
+    <b:includable id='post' var='i'>
+         <h2><data:i.timestamp/></h2>
+        <b:if cond='data:i.title'>
+        <a expr:href='data:i.url'><data:i.title/></a>
+         </b:if>
+	<b:if cond='data:i.hasJumpLink'>
+     <span><data:i.body/></span>
+     <div class='jump-link'>
+    <a expr:href='data:i.url' expr:title='data:i.title'>
+     <data:i.jumpText/>
+    </a>
+    </div>
+   <b:else/>
+      <article><data:i.body/></article>
+      </b:if>
+    </b:includable>
+    <b:includable id='postQuickEdit'/>
+    <b:includable id='shareButtons'/>
+    <b:includable id='status-message'/>
+    <b:includable id='threaded-comment-form'/>
+    <b:includable id='threaded_comment_js'/>
+    <b:includable id='threaded_comments'/>
+  </b:widget>
+</b:section>
+</body>
+</html>
