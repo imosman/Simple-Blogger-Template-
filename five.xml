@@ -71,7 +71,7 @@
         <a expr:href='data:i.url'><data:i.title/></a>
          </b:if>
 	<b:if cond='data:i.hasJumpLink'>
-     <span><data:i.body/></span>
+     <article><data:i.body/></article>
      <div class='jump-link'>
     <a expr:href='data:i.url' expr:title='data:i.title'>
      <data:i.jumpText/>
