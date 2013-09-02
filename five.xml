@@ -66,10 +66,10 @@
     </b:if>
     </b:includable>
     <b:includable id='post' var='i'>
-         <h2><data:i.timestamp/></h2>
+        <h2><data:i.timestamp/></h2>
         <b:if cond='data:i.title'>
-        <a expr:href='data:i.url'><data:i.title/></a>
-         </b:if>
+        <h3><a expr:href='data:i.url'><data:i.title/></a></h3>
+        </b:if>
 	<b:if cond='data:i.hasJumpLink'>
      <article><data:i.body/></article>
      <div class='jump-link'>
