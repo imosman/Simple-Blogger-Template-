@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html b:version='2'>
+<html b:version='2' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
 
  <head>
-   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+   <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'/>
      <title><data:blog.pageTitle/></title>
  <b:include data='blog' name='all-head-content'/>
 &lt;style type=&quot;text/css&quot;&gt;
@@ -16,7 +16,7 @@
 
 <body>
   <b:section class='header' id='header'>
-    <b:widget id='Header1' locked='false' title='' type='Header'>
+    <b:widget id='Header1' locked='false' title='Picture Windwow (Header)' type='Header'>
       <b:includable id='main'>
         <h1><b:include name='title'/></h1>
         </b:includable>
@@ -47,7 +47,9 @@
     <b:includable id='comments'/>
     <b:includable id='feedLinks'/>
     <b:includable id='feedLinksBody'/>
-    <b:includable id='iframe_comments'/>
+    <b:includable id='iframe_comments' var='i'>
+       <div class='cmt_iframe_holder' expr:data-href='data:i.canonicalUrl' expr:data-viewtype='data:i.viewType'/>
+    </b:includable>
     <b:includable id='mobile-index-post'/>
     <b:includable id='mobile-main'/>
     <b:includable id='mobile-nextprev'/>
@@ -79,6 +81,9 @@
    <b:else/>
     <data:i.body/>
       </b:if>
+     <b:if cond='data:blog.pageType == &quot;item&quot;'>
+      <b:include name='iframe_comments'/>
+     </b:if>
     </b:includable>
     <b:includable id='postQuickEdit'/>
     <b:includable id='shareButtons'/>
