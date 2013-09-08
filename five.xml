@@ -16,7 +16,7 @@
 
 <body>
   <b:section class='header' id='header'>
-    <b:widget id='Header1' locked='false' title='5202 (Header)' type='Header'>
+    <b:widget id='Header1' locked='false' title='' type='Header'>
       <b:includable id='main'>
         <h1><b:include name='title'/></h1>
         </b:includable>
@@ -27,16 +27,15 @@
        <b:else/>
         <a expr:href='data:blog.homepageUrl'><data:title/></a>
         </b:if>
-</b:includable>
+	  </b:includable>
     </b:widget>
   </b:section>
 <b:section class='main' id='main'>
   <b:widget id='Blog1' locked='false' title='Blogposts' type='Blog'>
     <b:includable id='main'>
        <b:loop values='data:posts' var='i'>    
-            <b:include data='i' name='post'/>
+         <article><b:include data='i' name='post'/></article>
        </b:loop>
-      <br />
       <b:include name='nextprev'/>
     </b:includable>
     <b:includable id='backlinkDeleteIcon'/>
@@ -66,19 +65,19 @@
     </b:if>
     </b:includable>
     <b:includable id='post' var='i'>
-        <h2><data:i.timestamp/></h2>
-        <b:if cond='data:i.title'>
+      <h2><data:i.timestamp/></h2>
+       <b:if cond='data:i.title'>
         <h3><a expr:href='data:i.url'><data:i.title/></a></h3>
-        </b:if>
+       </b:if>
 	<b:if cond='data:i.hasJumpLink'>
-     <article><data:i.body/></article>
+     <data:i.body/>
      <div class='jump-link'>
     <a expr:href='data:i.url' expr:title='data:i.title'>
      <data:i.jumpText/>
     </a>
     </div>
    <b:else/>
-      <article><data:i.body/></article>
+    <data:i.body/>
       </b:if>
     </b:includable>
     <b:includable id='postQuickEdit'/>
