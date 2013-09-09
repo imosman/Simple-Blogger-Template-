@@ -82,6 +82,16 @@
     <data:i.body/>
       </b:if>
      <b:if cond='data:blog.pageType == &quot;item&quot;'>
+      <div class='post-footer'>
+       <span>
+        <b:if cond='data:i.labels'>
+          <data:postLabelsLabel/>
+          <b:loop values='data:i.labels' var='label'>
+            <a expr:href='data:i.url' rel='tag'><data:label.name/></a><b:if cond='data:label.isLast != &quot;true&quot;'>,</b:if>
+          </b:loop>
+        </b:if>
+       </span> 
+      </div>
       <b:include name='iframe_comments'/>
      </b:if>
     </b:includable>
