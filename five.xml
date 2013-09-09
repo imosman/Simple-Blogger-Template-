@@ -93,5 +93,11 @@
     <b:includable id='threaded_comments'/>
   </b:widget>
 </b:section>
+<script>
+  window.___gcfg = {
+    lang: 'de-DE',
+    parsetags: 'explicit'
+  }
+</script>
 </body>
 </html>
