@@ -14,7 +14,7 @@
 ]]></b:template-skin>
 </head>
 
-<body>
+<body expr:class='&quot;loading&quot;  + data:blog.mobileClass +  &quot; &quot;  + data:blog.pageType'>
   <b:section class='header' id='header'>
     <b:widget id='Header1' locked='false' title='Picture Windwow (Header)' type='Header'>
       <b:includable id='main'>
