@@ -2,42 +2,48 @@
 <!DOCTYPE html>
 <html b:version='2'>
 
- <head>
-   <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'/>
-     <title><data:blog.pageTitle/></title>
- <b:include data='blog' name='all-head-content'/>
+<head>
+<meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'/>
+<title><data:blog.pageTitle/></title>
+<b:include data='blog' name='all-head-content'/>
 &lt;style type=&quot;text/css&quot;&gt;
 &lt;!-- /*
- <b:skin><![CDATA[*/
+<b:skin><![CDATA[*/
 ]]></b:skin>
- <b:template-skin><![CDATA[
+<b:template-skin><![CDATA[
 ]]></b:template-skin>
 </head>
 
 <body expr:class='&quot;loading&quot;  + data:blog.mobileClass +  &quot; &quot;  + data:blog.pageType'>
-  <b:section class='header' id='header'>
-    <b:widget id='Header1' locked='false' title='Picture Windwow (Header)' type='Header'>
-      <b:includable id='main'>
-        <h1><b:include name='title'/></h1>
-        </b:includable>
-      <b:includable id='description'/>
-      <b:includable id='title'>
-       <b:if cond='data:blog.url == data:blog.homepageUrl'>
-        <data:title/>
-       <b:else/>
-        <a expr:href='data:blog.homepageUrl'><data:title/></a>
-        </b:if>
-	  </b:includable>
-    </b:widget>
-  </b:section>
+<b:section class='header' id='header'>
+  <b:widget id='Header1' locked='false' title='Awesome (Header)' type='Header'>
+    <b:includable id='main'>
+<h1><b:include name='title'/></h1>
+</b:includable>
+    <b:includable id='description'/>
+    <b:includable id='title'>
+<b:if cond='data:blog.url == data:blog.homepageUrl'>
+<data:title/>
+<b:else/>
+<a expr:href='data:blog.homepageUrl'><data:title/></a>
+</b:if>
+</b:includable>
+  </b:widget>
+</b:section>
+
 <b:section class='main' id='main'>
   <b:widget id='Blog1' locked='false' title='Blogposts' type='Blog'>
-    <b:includable id='main'>
-       <b:loop values='data:posts' var='i'>    
-         <article><b:include data='i' name='post'/></article>
-       </b:loop>
-      <b:include name='nextprev'/>
-    </b:includable>
+    <b:includable id='main' var='top'>
+
+<!-- posts -->
+<b:loop values='data:posts' var='post'>      
+<b:include data='post' name='post'/>      
+</b:loop>
+
+<!-- navigation -->
+<b:include name='nextprev'/>
+
+</b:includable>
     <b:includable id='backlinkDeleteIcon'/>
     <b:includable id='backlinks'/>
     <b:includable id='comment-form'/>
@@ -47,54 +53,146 @@
     <b:includable id='comments'/>
     <b:includable id='feedLinks'/>
     <b:includable id='feedLinksBody'/>
-    <b:includable id='iframe_comments' var='i'>
-       <div class='cmt_iframe_holder' expr:data-href='data:i.canonicalUrl' expr:data-viewtype='data:i.viewType'/>
-    </b:includable>
+    <b:includable id='iframe_comments' var='i'>	
+<b:if cond='data:i.allowIframeComments'>
+<script expr:src='data:i.iframeCommentSrc' type='text/javascript'/>
+<div class='cmt_iframe_holder' expr:data-href='data:i.canonicalUrl' expr:data-viewtype='data:i.viewType'/>
+</b:if>
+</b:includable>
     <b:includable id='mobile-index-post'/>
     <b:includable id='mobile-main'/>
     <b:includable id='mobile-nextprev'/>
     <b:includable id='mobile-post'/>
     <b:includable id='nextprev'>
-    <b:if cond='data:newerPageUrl'>
-     <a expr:href='data:newerPageUrl'>
-       <data:newerPageTitle/>
-      </a>
-    </b:if>
-    <b:if cond='data:olderPageUrl'>
-      <a expr:href='data:olderPageUrl'>
-        <data:olderPageTitle/>
-      </a>
-    </b:if>
-    </b:includable>
+<ul class='pager'>
+<b:if cond='data:newerPageUrl'>
+<li class='next'>
+<a class='blog-pager-newer-link' expr:href='data:newerPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-newer-link&quot;' expr:title='data:newerPageTitle'><data:newerPageTitle/></a>
+</li>
+</b:if>
+
+<b:if cond='data:olderPageUrl'>
+<li class='previous'>
+<a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-older-link&quot;' expr:title='data:olderPageTitle'><data:olderPageTitle/></a>
+</li>
+</b:if>		
+</ul>
+</b:includable>
     <b:includable id='post' var='i'>
-      <h2><data:i.timestamp/></h2>
-       <b:if cond='data:i.title'>
-        <h3><a expr:href='data:i.url'><data:i.title/></a></h3>
-       </b:if>
-	<b:if cond='data:i.hasJumpLink'>
-     <data:i.body/>
-     <div class='jump-link'>
-    <a expr:href='data:i.url' expr:title='data:i.title'>
-     <data:i.jumpText/>
-    </a>
-    </div>
-   <b:else/>
-    <data:i.body/>
-      </b:if>
-     <b:if cond='data:blog.pageType == &quot;item&quot;'>
-      <div class='post-footer'>
-       <span>
-        <b:if cond='data:i.labels'>
-          <data:postLabelsLabel/>
-          <b:loop values='data:i.labels' var='label'>
-            <a expr:href='data:label.url' rel='tag'><data:label.name/></a><b:if cond='data:label.isLast != &quot;true&quot;'>,</b:if>
-          </b:loop>
-        </b:if>
-       </span> 
-      </div>
-      <b:include name='iframe_comments'/>
-     </b:if>
-    </b:includable>
+<article>
+<div class='post' itemprop='blogPost' itemscope='itemscope' itemtype='http://schema.org/BlogPosting'>
+<b:if cond='data:post.firstImageUrl'>
+<meta expr:content='data:i.firstImageUrl' itemprop='image_url'/>
+</b:if>
+<meta expr:content='data:blog.blogId' itemprop='blogId'/>
+<meta expr:content='data:i.id' itemprop='postId'/>
+<a expr:name='data:i.id'/>
+<header>
+<div class='post-header'>
+	<b:if cond='data:i.title'>
+	
+		<!-- post-title -->
+		<div class='post-title'>
+			<h2 itemprop='name'>
+			<b:if cond='data:i.link'>
+			<a expr:href='data:i.link'><data:i.title/></a>
+			<b:else/>
+			<b:if cond='data:i.url'>
+			<b:if cond='data:blog.url != data:post.url'>
+			<a expr:href='data:i.url'><data:i.title/></a>
+			<b:else/>
+			<data:i.title/>
+			</b:if>
+			<b:else/>
+			<data:i.title/>
+			</b:if>
+			</b:if>
+			</h2>
+		</div>
+		<!-- post-title end -->
+		
+		<!-- post-date-->
+		<b:if cond='data:i.dateHeader'>
+			<div class='post-date'> 
+			<h3 itemprop='date'>
+			<span><data:i.dateHeader/></span>
+			</h3>
+			</div>
+		</b:if>
+		<!-- post-date end-->
+		
+	</b:if>
+	
+	<!-- post-author -->
+	<div class='post-author'>				
+		<b:if cond='data:top.showAuthor'>
+		<span>
+		<data:top.authorLabel/>
+		</span>
+			<b:if cond='data:i.authorProfileUrl'>
+			<span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
+			<meta expr:content='data:i.authorProfileUrl' itemprop='url'/>
+			<a class='g-profile' expr:href='data:i.authorProfileUrl' rel='author' title='author profile'>
+			<span itemprop='name'><data:i.author/></span>
+			</a>
+			</span>
+			<b:else/>
+			<span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
+			<span itemprop='name'><data:i.author/></span>
+			</span>
+			</b:if>
+		</b:if>
+	</div> 
+	<!-- post-author end -->
+	
+</div>
+</header>
+
+<!-- post-body -->
+<b:if cond='data:blog.metaDescription == &quot;&quot;'>
+	<div class='post-body' expr:id='&quot;post-body-&quot; + data:i.id' itemprop='description articleBody'>
+	<data:i.body/>
+	</div>
+<b:else/>
+	<div class='post-body' expr:id='&quot;post-body-&quot; + data:i.id' itemprop='articleBody'>
+	<data:i.body/>
+	</div>
+</b:if>
+
+<b:if cond='data:i.hasJumpLink'>
+	<div class='jump-link'>
+	<a expr:href='data:i.url + &quot;#more&quot;' expr:title='data:i.title'><data:i.jumpText/></a>
+	</div>
+</b:if>
+<!-- post-body end -->
+
+<!-- G+ comments -->
+<b:if cond='data:blog.pageType == &quot;item&quot;'>
+<b:include data='i' name='iframe_comments'/>
+</b:if>
+<!-- G+ comments end -->
+
+<!-- social-buttons -->
+<b:if cond='data:blog.isMobile'>
+	<b:else/>
+	<b:if cond='data:blog.pageType != &quot;item&quot;'>
+		<b:if cond='data:blog.pageType != &quot;static_page&quot;'>
+			<div class='social-buttons'>
+			<span class='g-plusone' data-align='right' data-annotation='bubble' data-size='medium' data-width='300' expr:data-href='data:i.canonicalUrl'/>
+			<a class='twitter-share-button' data-lang='de' data-size='medium' expr:data-url='data:i.canonicalUrl' href='https://twitter.com/share'>Twittern</a>
+			<script>
+			//<![CDATA[
+			!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');//]]>
+			</script>
+			</div>
+		</b:if> 
+	</b:if>
+</b:if>
+<!-- social-buttons end-->
+
+</div>
+</article>
+</b:includable>
     <b:includable id='postQuickEdit'/>
     <b:includable id='shareButtons'/>
     <b:includable id='status-message'/>
@@ -103,11 +201,6 @@
     <b:includable id='threaded_comments'/>
   </b:widget>
 </b:section>
-<script>
-  window.___gcfg = {
-    lang: 'de-DE',
-    parsetags: 'explicit'
-  }
-</script>
+
 </body>
 </html>
