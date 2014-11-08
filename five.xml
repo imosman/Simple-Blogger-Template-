@@ -35,7 +35,7 @@
   <b:widget id='Blog1' locked='false' title='Blogposts' type='Blog'>
     <b:includable id='main' var='top'>
 
-<!-- posts -->
+<!-- posts newnew  -->
 <b:loop values='data:posts' var='post'>      
 <b:include data='post' name='post'/>      
 </b:loop>
