@@ -1,7 +1,7 @@
-# Building a Blogger basic-template: five
+# Simple Blogger (Official) Template with responsiveness
 
-'Five' is a simple, leightwight Blogger basic-template without any bloating `<div>`, classes or ID's. Use it as a starting point for your own projects.
+It is the official template. I just add responsiveness to the code. 
 
 ## How to use it
 
-Get started - download and unzip ZIP file. Go to Blogger Dashboard > Template > Backup/Restore and upload `five.xml`file.
+Get started - download and unzip ZIP file. Go to Blogger Dashboard > Template > Backup/Restore and upload `simpletemplate.xml`file.
